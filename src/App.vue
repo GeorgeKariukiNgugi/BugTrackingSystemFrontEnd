@@ -1,56 +1,68 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
+    <v-main>      
+      <v-img
+        :min-height="minHeight"
+        :src="require('@/assets/home-hero.jpg')"
+        class="white--text"
+        gradient="to right, rgba(5, 11, 31, .8), rgba(5, 11, 31, .8)"
       >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
+        <v-container class="fill-height px-4 py-12">
+          <v-responsive
+            class="d-flex align-center"
+            height="100%"
+            max-width="700"
+            width="100%"
+          >
+            <base-heading title="PROMOTE YOUR BUSINESS WITH ZERO" />
 
-    <v-main>
-      <HelloWorld/>
+            <base-body>
+              Infographic hypotheses influencer user experience Long madel ture
+              gen-z paradigm shift client partner network product seilans solve
+              management influencer analytics leverage virality. incubator seed
+              round massmarket. buyer agile development growth hacking
+              business-to-consumer ecosystem
+            </base-body>
+
+            <div
+              :class="
+                $vuetify.breakpoint.smAndDown
+                  ? 'flex-column align-start'
+                  : 'align-center'
+              "
+              class="d-flex flex-wrap"
+            >
+              <base-btn>
+              Discover More
+            </base-btn>
+              
+
+              <span class="font-weight-bold ml-6 mr-4 my-4">or</span>
+
+             <base-btn
+              :ripple="false"
+              class="pa-1"
+              height="auto"
+              text
+            >
+              Get Started Now
+            </base-btn>
+            </div>
+          </v-responsive>
+        </v-container>
+      </v-img>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+// import HelloWorld from './components/HelloWorld';
 
 export default {
-  name: 'App',
+  name: "App",
 
   components: {
-    HelloWorld,
+    // HelloWorld,
   },
 
   data: () => ({
