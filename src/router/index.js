@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Landing from '../views/UserPages/landing'
 import About from '../views/UserPages/about'
 import Contact from '../views/UserPages/contactUs'
+import LogIn from '../views/UserPages/login.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ Vue.use(VueRouter)
     path: '/contact-us',
     name: 'Contact',
     component: Contact
+  },
+  {
+    path: '/login',
+    name: 'LogIn',
+    component: LogIn
   },
   // {
   //   path: '/about',

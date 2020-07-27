@@ -3,7 +3,8 @@
     <v-app-bar
       id="home-app-bar"
       app
-      color="gray"
+      light
+      color="white"
       elevation="1"
       height="80"
     >
@@ -21,7 +22,7 @@
         max-width="128"
         width="100%"
       /> -->
-
+          <h1 style="font-family:'cursive'">Bug Tracking System.</h1>
       <v-spacer />
 
       <div color="gray">
@@ -73,6 +74,7 @@
         'Landing',
         'About',
         'Contact',
+        'LogIn',
         // 'Pro',
       ],
     }),
