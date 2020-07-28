@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Landing from '../views/UserPages/landing'
+import Home from '../views/UserPages/landing'
 import About from '../views/UserPages/about'
 import Contact from '../views/UserPages/contactUs'
 import LogIn from '../views/UserPages/login.vue'
@@ -10,8 +10,8 @@ Vue.use(VueRouter)
   const routes = [
   {
     path: '/',
-    name: 'Landing',
-    component: Landing
+    name: 'Home',
+    component: Home
   },
   {
     path: '/about',

@@ -8,6 +8,7 @@ import '@mdi/font/css/materialdesignicons.css'
 import  './plugins/base'
 import  './plugins/section'
 import  './plugins/userCore'
+import  './plugins/meta'
 Vue.config.productionTip = false
 
 new Vue({

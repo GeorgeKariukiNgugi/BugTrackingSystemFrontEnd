@@ -18,7 +18,7 @@
         v-for="name in items"
         :key="name"
         :to="{ name }"
-        :exact="name === 'Landing'"
+        :exact="name === 'Home'"
         color="primary"
       >
         <v-list-item-content>

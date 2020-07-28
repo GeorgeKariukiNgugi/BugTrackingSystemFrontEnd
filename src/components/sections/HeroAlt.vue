@@ -4,22 +4,23 @@
       <base-img
         :height="$vuetify.breakpoint.mdAndUp ? 350 : 225"
         :gradient="gradient"
-        :src="src"
+        :src="require('@/assets/home-hero.jpg')"
         color="#45516b"
         flat
         max-width="100%"
         tile
       >
         <v-row
-          v-if="title"
+          
           align="center"
           class="ma-0 fill-height text-center"
           justify="center"
         >
           <v-col cols="12">
             <base-heading
-              :title="title"
+              title="About Us"
               space="2"
+              color="white"
               weight="500"
             />
 
@@ -31,6 +32,7 @@
             <v-breadcrumbs
               :items="items"
               class="justify-center pa-0"
+              color="white"
               divider=">"
             />
           </v-col>
@@ -84,8 +86,10 @@
   }
 </script>
 
-<style lang="sass">
-  #hero-alt
-    .v-breadcrumbs__item
-      color: #FFFFFF
+<style >
+  #hero-alt > v-breadcrumbs__item{
+    color: #FFFFFF
+  }
+      
+    
 </style>
