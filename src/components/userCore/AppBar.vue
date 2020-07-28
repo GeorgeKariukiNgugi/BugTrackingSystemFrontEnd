@@ -34,7 +34,7 @@
             v-for="(name, i) in items"
             :key="i"
             :to="{ name }"
-            :exact="name === 'Home'"
+            :exact="name === 'Landing'"
             :ripple="false"
             active-class="text--primary"
             class="font-weight-bold"

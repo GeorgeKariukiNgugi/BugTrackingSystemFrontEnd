@@ -5,11 +5,11 @@
       class="white--text"
       gradient="to right, rgba(5, 11, 31, .8), rgba(5, 11, 31, .8)"
     >
-      <v-row class=" py-12">
+      <v-row class=" py-15">
         <v-col cols="12" class="offset-md-4 offset-sm-1" md="4" sm="10">
           <base-material-card
             class="v-card-profile"
-            avatar="require('@/assets/home-hero.jpg')"
+            avatar="email"
           >
             <v-card-text class="text-center">
               Sign in to start your session
