@@ -10,7 +10,7 @@
           <v-col cols="12" class="offset-md-4 offset-sm-1" md="4" sm="10">
             <base-material-card class="v-card-profile" avatar="email">
               <v-card-text class="text-center">
-                Sign in to start your session
+                Register To Report A Bug.
               </v-card-text>
               <v-row>
                 <v-col cols="12" class="offset-md-1 offset-sm-2" sm="8" md="10">
@@ -21,11 +21,19 @@
                       sm="10"
                       md="10"
                     >
+                     <v-text-field
+                        counter
+                        v-model="name"
+                        prepend-icon="face"
+                        label="Name"
+                        required
+                        :rules="[rules.required]"
+                      ></v-text-field>
                       <v-text-field
                         :counter="10"
                         v-model="email"
                         prepend-icon="email"
-                        label="Email"
+                        label="Email Address"
                         required
                         :rules="[rules.required, rules.email]"
                       ></v-text-field>
@@ -45,14 +53,27 @@
                         counter
                         @click:append="show1 = !show1"
                       ></v-text-field>
+
+                      <v-text-field
+                        prepend-icon="vpn_key"
+                        :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                        :rules="[rules.required, rules.min, rules.confirmPassword]"
+                        :type="show2 ? 'text' : 'password'"
+                        name="input-10-1"
+                        label="Retype Password"
+                        v-model="confirmPassword"
+                        hint="At least 8 characters"
+                        counter
+                        @click:append="show2 = !show2"
+                      ></v-text-field>
                     </v-col>
                   </v-row>
                   <v-row no-gutters>
                     <v-col
                       cols="12"
-                      class=" offset-sm-4 offset-md-4 "
+                      class=" offset-sm-4 offset-md-3 "
                       sm="4"
-                      md="4"
+                      md="6"
                     >
                       <v-btn
                         @click="submitData()"
@@ -61,21 +82,20 @@
                         color="success"
                         dark
                       >
-                        <v-icon>lock_open</v-icon> Log In.</v-btn
+                        <v-icon>gavel</v-icon> Register User.</v-btn
                       >
                     </v-col>
                   </v-row>
                   <v-row>
                     <v-col cols="12" class="text-center">                      
-                          <!-- <a href="/registration" class="text-decoration-none" color="blue lighten-5">Don't Have An Account? Click To Register.</a> -->
-                          <router-link class="text-decoration-none"
-                          to="/registration">
-                          <p class="text-decoration-none"                        
+                          <router-link class="text-decoration-none" color="blue lighten-5"
+                          to="/login">
+                          <p                        
                         small
                         text                        
-                        blue
+                        color="blue"
                         dark
-                      > Don't Have An Account? Click To Register.
+                      > Have An Account? Click To LogIn.
                         </p>
                           </router-link>
                     </v-col>
@@ -109,14 +129,17 @@ export default {
   data() {
     return {
       email: "",
+      confirmPassword: '',
       password: "",
       valid: false,
       show1: false,
+      show2:false,
       rules: {
         required: (value) => !!value || "Required.",
         min: (v) => v.length >= 8 || "Min 8 characters",
         emailMatch: () => "The email and password you entered don't match",
         email: (v) => /.+@.+/.test(v) || "E-mail must be valid",
+        confirmPassword: (v) => v === this.password || "Pasword Must Match To Retyped Password."
       },
     };
   },

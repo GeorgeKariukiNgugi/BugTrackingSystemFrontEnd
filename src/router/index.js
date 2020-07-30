@@ -4,6 +4,7 @@ import Home from '../views/UserPages/landing'
 import About from '../views/UserPages/about'
 import Contact from '../views/UserPages/contactUs'
 import LogIn from '../views/UserPages/login.vue'
+import Registration from '../views/UserPages/register.vue'
 
 Vue.use(VueRouter)
 
@@ -28,6 +29,11 @@ Vue.use(VueRouter)
     name: 'LogIn',
     component: LogIn
   },
+  {
+    path: '/registration',
+    name: 'Registration',
+    component: Registration
+  },  
   // {
   //   path: '/about',
   //   name: 'About',
