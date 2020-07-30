@@ -2,7 +2,7 @@
   <v-app>
     <ucore-app-bar />
     <v-main>
-      <section-hero-alt/>
+      <section-hero-alt :name="pageName"/>
       <section-about-our-product />
       <section-theme-features />
       <section-affiliates />
@@ -17,6 +17,7 @@
 <script>
 export default {
     data: () => ({
+      pageName:'About Us',
       items: [
         {
           text: 'Dashboard',

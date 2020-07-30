@@ -51,7 +51,9 @@
 
   export default {
     name: 'SectionHeroAlt',
-
+    props:[
+      'name'
+    ],
     metaInfo () {
       return {
         changed: meta => (this.title = meta.titleChunk.toUpperCase()),
@@ -63,7 +65,7 @@
     },
 
     data: () => ({
-      title: '',
+      title: this.name,
     }),
 
     computed: {
@@ -79,7 +81,7 @@
       items () {
         return [
           { text: 'HOME', to: '/' },
-          { text: this.title },
+          { text: this.name },
         ]
       },
     },

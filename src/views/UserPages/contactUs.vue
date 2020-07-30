@@ -3,7 +3,7 @@
    <v-app>
     <ucore-app-bar/>
     <v-main>         
-        <section-hero-alt/>
+        <section-hero-alt :name="pageName"/>
         <section-keep-in-touch/>
         <section-map/>
         <section-newsletter/>
@@ -16,7 +16,9 @@
 
 <script>
 export default {
-
+      data: () => ({
+      pageName:'Contact Us',      
+    }),
 }
 </script>
 
