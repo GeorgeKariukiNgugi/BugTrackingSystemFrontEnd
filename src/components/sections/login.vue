@@ -22,13 +22,28 @@
                       md="10"
                     >
                       <v-text-field
-                        :counter="10"
+                        counter
                         v-model="email"
                         prepend-icon="email"
                         label="Email"
                         required
                         :rules="[rules.required, rules.email]"
                       ></v-text-field>
+                    </v-col>
+                  </v-row>
+                  <v-row v-show="unsucessfullLogIn" no-gutters="">
+                    <v-col
+                      cols="12"
+                      class="offset-md-1 offset-sm-1 text-center"
+                      sm="10"
+                      md="10"
+                    >
+                      <p class="red--text text--darken-5">
+                        <v-icon class="red--text text--darken-5"
+                          >report_problem</v-icon
+                        >
+                        The Credentials DoNot Match Our Records.
+                      </p>
                     </v-col>
                   </v-row>
                   <v-row no-gutters>
@@ -50,9 +65,9 @@
                   <v-row no-gutters>
                     <v-col
                       cols="12"
-                      class=" offset-sm-4 offset-md-4 "
-                      sm="4"
-                      md="4"
+                      class=" text-center offset-sm-3 offset-md-3 "
+                      sm="6"
+                      md="6"
                     >
                       <v-btn
                         @click="submitData()"
@@ -61,23 +76,29 @@
                         color="success"
                         dark
                       >
-                        <v-icon>lock_open</v-icon> Log In.</v-btn
-                      >
+                        <span v-show="!progress"
+                          ><v-icon>lock_open</v-icon> Log In.</span
+                        >
+                        <v-progress-circular
+                          v-show="progress"
+                          :width="3"
+                          color="white"
+                          indeterminate
+                        ></v-progress-circular>
+                      </v-btn>                      
                     </v-col>
                   </v-row>
                   <v-row>
-                    <v-col cols="12" class="text-center">                      
-                          <!-- <a href="/registration" class="text-decoration-none" color="blue lighten-5">Don't Have An Account? Click To Register.</a> -->
-                          <router-link class="text-decoration-none"
-                          to="/registration">
-                          <p class="text-decoration-none"                        
-                        small
-                        text                        
-                        blue
-                        dark
-                      > Don't Have An Account? Click To Register.
+                    <v-col cols="12" class="text-center">
+                      <!-- <a href="/registration" class="text-decoration-none" color="blue lighten-5">Don't Have An Account? Click To Register.</a> -->
+                      <router-link
+                        class="text-decoration-none"
+                        to="/registration"
+                      >
+                        <p class="text-decoration-none" small text blue dark>
+                          Don't Have An Account? Click To Register. {{postingProgressState + '   ' + logInStatus}}
                         </p>
-                          </router-link>
+                      </router-link>
                     </v-col>
                   </v-row>
                 </v-col>
@@ -91,6 +112,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
 export default {
   name: "SectionHero",
 
@@ -98,16 +121,29 @@ export default {
     theme: { isDark: false },
   },
   methods: {
+    ...mapActions([
+      "unsetLogInStatus",
+      "postingLogInData",
+      "unset_progress_state",
+    ]),
     submitData() {
       if (this.$refs.form.validate()) {
-        console.log(
-          "The data valdation is correct. " + this.email + this.password
-        );
+        this.progress = true;
+        this.progressText = true;
+        // ! posting data to LogIn.
+        var obj = {};
+        obj["email"] = this.email;
+        obj["password"] = this.password;
+
+        this.$store.dispatch("postingLogInData", obj);
       }
     },
   },
   data() {
     return {
+      progress: false,
+      progressText: false,
+      unsucessfullLogIn: false,
       email: "",
       password: "",
       valid: false,
@@ -122,11 +158,34 @@ export default {
   },
 
   computed: {
+    ...mapGetters(["logInStatus", "postingProgressState"]),
+
     minHeight() {
       const height = this.$vuetify.breakpoint.mdAndUp ? "100vh" : "50vh";
 
       return `calc(${height} - ${this.$vuetify.application.top}px)`;
     },
+  },
+
+  // ! watching the progress state.
+
+  watch: {
+    postingProgressState: function() {
+      console.log("Change happened to Progress.");
+      if (this.progress == true) {
+        console.log("Change happened.");
+        this.progress = false;        
+        // ! unssetting the posting progres state.
+        this.$store.dispatch("unset_progress_state");
+      }
+    },
+    logInStatus: function(){
+      console.log("Change happened to LogIn Status");
+      if (this.logInStatus == false ) {
+        this.logInStatus = true;
+        this.$store.dispatch("unsetLogInStatus");
+      }
+    }
   },
 };
 </script>

@@ -25,15 +25,17 @@ const actions = {
 
     },
 
-    postRegisteringAUser({ commit },userDetails) {
-
-        console.log("Called the Posting User Method.");        
+    postRegisteringAUser({ commit },userDetails) {              
         axios
             .post("https://bugtrackingsystemapi.georgekprojects.tk/api/register",userDetails)
             .then(response => {
                 console.log("The call to register Users.");
                 if (response.status === 200) {
                     commit("UPDATE_REGISTERING_STATE",true);
+
+                    // ! redirect user to logIn Page to LogIn. 
+                    
+
                     console.log(response);
                 } else if(response.status === 206) {
                     commit("UPDATING_ERROR_STATE",response.data);

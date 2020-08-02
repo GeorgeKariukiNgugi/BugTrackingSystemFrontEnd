@@ -43,7 +43,7 @@
                         :rules="[rules.required]"
                       ></v-text-field>
                       <v-text-field
-                        :counter="10"
+                        counter
                         v-model="email"
                         prepend-icon="email"
                         label="Email Address"
@@ -63,7 +63,7 @@
                         label="Password"
                         v-model="password"
                         hint="At least 8 characters"
-                        counter
+                        :counter= "8"
                         @click:append="show1 = !show1"
                       ></v-text-field>
 
@@ -80,7 +80,7 @@
                         label="Retype Password"
                         v-model="confirmPassword"
                         hint="At least 8 characters"
-                        counter
+                        :counter= "8"
                         @click:append="show2 = !show2"
                       ></v-text-field>
                     </v-col>
@@ -88,7 +88,7 @@
                   <v-row no-gutters>
                     <v-col
                       cols="12"
-                      class=" offset-sm-4 offset-md-3 "
+                      class=" text-center offset-sm-4 offset-md-3 "
                       sm="4"
                       md="6"
                     >
@@ -155,7 +155,7 @@ export default {
         obj["name"] = this.name;
         obj["email"] = this.email;
         obj["password"] = this.password;
-        (obj["password_confirmation"] = this.password),
+        obj["password_confirmation"] = this.password,
           this.$store.dispatch("postRegisteringAUser", obj);
       }
     },
