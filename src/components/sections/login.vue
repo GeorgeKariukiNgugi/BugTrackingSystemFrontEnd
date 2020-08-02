@@ -45,7 +45,7 @@
                       ></v-text-field>
                     </v-col>
                   </v-row>
-                  <v-row v-show="logInStatus" no-gutters>
+                  <v-row v-show="unsucessfullLogIn" no-gutters>
                     <v-col
                       cols="12"
                       class="offset-md-1 offset-sm-1 text-center"
@@ -195,8 +195,9 @@ export default {
       }
     },
     logInStatus: function(){ 
-      console.log("Change happened to update state.");     
-      if (this.logInStatus == false ) {
+         console.log("Change happened to update state. 11111");  
+      if (this.unsucessfullLogIn == false ) {
+        console.log("Change happened to update state. 22222");  
         this.unsucessfullLogIn = true;
         this.$store.dispatch("unsetLogInStatus");
       }
@@ -204,6 +205,7 @@ export default {
     registrationAlertState:function(){
       console.log("registrationAlertState changed");
       if (this.registrationAlert == false) {
+        console.log("registrationAlertState changed 121212");
         this.registrationAlert = true;
         this.$store.dispatch("unsetRegistration");
       }
