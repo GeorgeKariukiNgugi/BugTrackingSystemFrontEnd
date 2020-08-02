@@ -32,8 +32,7 @@ const actions ={
                     // ! if the request is successful.                    
                     // ! redirect to the appropriate page based on the roles and permissions in the application. 
                     commit("PROGRESS_TO_POSTING",false);
-                    state.unSuccessfulLogIn = true;
-                    commit("UNSUCCESSFUL_LOG_IN",true);
+                    console.log("SUCCESS.");                    
 
                 } else if(response.status === 206){
                     // ! if the request is unsuccessful.
