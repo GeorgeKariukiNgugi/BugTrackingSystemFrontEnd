@@ -25,13 +25,11 @@ const actions ={
 
     postingLogInData({commit},logInData){
         axios.post("https://bugtrackingsystemapi.georgekprojects.tk/api/login",logInData).then(
-            response => { 
-                console.log("Calling LogIn Method");
+            response => {                 
                 //! getting the status of the request that is sent. 
                 console.log(response);
                 if (response.status === 200) {                    
-                    // ! if the request is successful.
-                    console.log("Success");
+                    // ! if the request is successful.                    
                     // ! redirect to the appropriate page based on the roles and permissions in the application. 
                     commit("PROGRESS_TO_POSTING",false);
                     state.unSuccessfulLogIn = true;

@@ -1,7 +1,9 @@
 import axios from "axios";
+import router from "../../../router";
 const state = {
     registering: false,
     errors: null,
+    registration_alert: false,
 };
 const mutations = {
     UPDATE_REGISTERING_STATE(state,payload) {
@@ -13,6 +15,12 @@ const mutations = {
 
     UNSET_THE_REGISTERING_STATE(state,payload){
         state.registering = payload
+    },
+    REGISTRATION_ALERT(state,payload){
+            state.registration_alert = payload;            
+    },
+    UNSET_REGISTRATION_ALERT(state,payload){
+        state.registration_alert = payload;
     }
 };
 const actions = {
@@ -28,19 +36,17 @@ const actions = {
     postRegisteringAUser({ commit },userDetails) {              
         axios
             .post("https://bugtrackingsystemapi.georgekprojects.tk/api/register",userDetails)
-            .then(response => {
-                console.log("The call to register Users.");
+            .then(response => {                
                 if (response.status === 200) {
                     commit("UPDATE_REGISTERING_STATE",true);
+                    commit("REGISTRATION_ALERT",true);
 
-                    // ! redirect user to logIn Page to LogIn. 
-                    
+                    // ! redirect user to logIn Page to LogIn.                                         
+                    router.push('/login') 
 
-                    console.log(response);
                 } else if(response.status === 206) {
                     commit("UPDATING_ERROR_STATE",response.data);
-                    commit("UPDATE_REGISTERING_STATE",true);
-                    console.log(response);
+                    commit("UPDATE_REGISTERING_STATE",true);                    
                 }
                 
             })
@@ -48,10 +54,15 @@ const actions = {
                 console.log("The call to register Users was unsuccessful", error);
             });
     },
+    unsetRegistration({commit}){
+        commit("UNSET_REGISTRATION_ALERT",false);
+        console.log("Unsettling alert called");
+    }
 };
 const getters = {
     registeringState: state=> state.registering,
     errorsState: state=> state.errors,
+    registrationAlertState: state=> state.registration_alert,
 };
 
 const Registration = {

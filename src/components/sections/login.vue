@@ -12,6 +12,20 @@
               <v-card-text class="text-center">
                 Sign in to start your session
               </v-card-text>
+              <div v-show="registrationAlertState">
+                <v-alert
+                  border="left"                  
+                  dismissible
+                  outlined
+                  close-icon="delete"                  
+                  type="success"
+                  class="text-center"
+                  size="0.75rem"
+                  dense
+                >
+               <span size="0.75rem">Conratulations, You Have Successfully Regitered, LogIn To Proceed.</span> 
+                </v-alert>
+              </div>
               <v-row>
                 <v-col cols="12" class="offset-md-1 offset-sm-2" sm="8" md="10">
                   <v-row no-gutters>
@@ -96,7 +110,7 @@
                         to="/registration"
                       >
                         <p class="text-decoration-none" small text blue dark>
-                          Don't Have An Account? Click To Register. {{postingProgressState + '   ' + logInStatus}}
+                          Don't Have An Account? Click To Register. {{registrationAlertState + '  ' + registrationAlert}}
                         </p>
                       </router-link>
                     </v-col>
@@ -125,6 +139,7 @@ export default {
       "unsetLogInStatus",
       "postingLogInData",
       "unset_progress_state",
+      "unsetRegistration"
     ]),
     submitData() {
       if (this.$refs.form.validate()) {
@@ -142,6 +157,7 @@ export default {
   data() {
     return {
       progress: false,
+      registrationAlert: false,
       progressText: false,
       unsucessfullLogIn: false,
       email: "",
@@ -158,7 +174,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["logInStatus", "postingProgressState"]),
+    ...mapGetters(["logInStatus", "postingProgressState","registrationAlertState"]),
 
     minHeight() {
       const height = this.$vuetify.breakpoint.mdAndUp ? "100vh" : "50vh";
@@ -170,8 +186,7 @@ export default {
   // ! watching the progress state.
 
   watch: {
-    postingProgressState: function() {
-      console.log("Change happened to Progress.");
+    postingProgressState: function() {    
       if (this.progress == true) {
         console.log("Change happened.");
         this.progress = false;        
@@ -179,13 +194,22 @@ export default {
         this.$store.dispatch("unset_progress_state");
       }
     },
-    logInStatus: function(){
-      console.log("Change happened to LogIn Status");
+    logInStatus: function(){      
       if (this.logInStatus == false ) {
         this.logInStatus = true;
         this.$store.dispatch("unsetLogInStatus");
       }
-    }
+    },
+    registrationAlertState:function(){
+      console.log("registrationAlertState changed");
+      if (this.registrationAlert == false) {
+        this.registrationAlert = true;
+        this.$store.dispatch("unsetRegistration");
+      }
+      else{
+        console.log("I have a problem.");
+      }
+    },
   },
 };
 </script>
