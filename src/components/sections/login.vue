@@ -45,7 +45,7 @@
                       ></v-text-field>
                     </v-col>
                   </v-row>
-                  <v-row v-show="unsucessfullLogIn" no-gutters="">
+                  <v-row v-show="logInStatus" no-gutters>
                     <v-col
                       cols="12"
                       class="offset-md-1 offset-sm-1 text-center"
@@ -110,7 +110,7 @@
                         to="/registration"
                       >
                         <p class="text-decoration-none" small text blue dark>
-                          Don't Have An Account? Click To Register. {{registrationAlertState + '  ' + registrationAlert}}
+                          Don't Have An Account? Click To Register. {{unsucessfullLogIn + '   '+ logInStatus}}
                         </p>
                       </router-link>
                     </v-col>
@@ -188,15 +188,16 @@ export default {
   watch: {
     postingProgressState: function() {    
       if (this.progress == true) {
-        console.log("Change happened.");
+        
         this.progress = false;        
         // ! unssetting the posting progres state.
         this.$store.dispatch("unset_progress_state");
       }
     },
-    logInStatus: function(){      
+    logInStatus: function(){ 
+      console.log("Change happened to update state.");     
       if (this.logInStatus == false ) {
-        this.logInStatus = true;
+        this.unsucessfullLogIn = true;
         this.$store.dispatch("unsetLogInStatus");
       }
     },
