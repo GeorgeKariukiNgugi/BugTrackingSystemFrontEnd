@@ -6,7 +6,8 @@ const state = {
 const mutations ={
 
     UNSUCCESSFUL_LOG_IN(state,payload){
-            state.successfulLogIn = payload;
+            state.unSuccessfulLogIn = payload;
+            console.log("This is the mutation for the unsucessful LogIn.");
     },
     UNSET_THE_LOGIN_STATUS(state,payload){
         state.successfulLogIn = payload;
@@ -35,8 +36,7 @@ const actions ={
                     console.log("SUCCESS.");                    
 
                 } else if(response.status === 206){
-                    // ! if the request is unsuccessful.
-
+                    // ! if the request is unsuccessful.                    
                     commit("UNSUCCESSFUL_LOG_IN",true);
                     commit("PROGRESS_TO_POSTING",false);
                 }
