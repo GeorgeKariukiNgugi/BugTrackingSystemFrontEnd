@@ -5,6 +5,7 @@ import About from '../views/UserPages/about'
 import Contact from '../views/UserPages/contactUs'
 import LogIn from '../views/UserPages/login.vue'
 import Registration from '../views/UserPages/register.vue'
+import FirstLineSupportLanding from '../views/FirstLineSupport/landing.vue'
 
 Vue.use(VueRouter)
 
@@ -33,7 +34,13 @@ Vue.use(VueRouter)
     path: '/registration',
     name: 'Registration',
     component: Registration
+  }, 
+  {
+    path: '/firstLineSupport',
+    name: 'FirstLineSupportLanding',
+    component: FirstLineSupportLanding
   },  
+  
   // {
   //   path: '/about',
   //   name: 'About',

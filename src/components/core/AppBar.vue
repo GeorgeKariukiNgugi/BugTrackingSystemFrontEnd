@@ -5,14 +5,14 @@
     app
     color="transparent"
     flat
-    height="75"
+    height="75"          
   >
     <v-btn
       class="mr-3"
       elevation="1"
       fab
       small
-      @click="setDrawer(!drawer)"
+      @click="setDrawer()"
     >
       <v-icon v-if="value">
         mdi-view-quilt
@@ -25,13 +25,13 @@
 
     <v-toolbar-title
       class="hidden-sm-and-down font-weight-light"
-      v-text="$route.name"
+      v-text="name"
     />
 
     <v-spacer />
 
     <v-text-field
-      :label="$t('search')"
+      :label="name"
       color="secondary"
       hide-details
       style="max-width: 165px;"
@@ -161,6 +161,7 @@
     },
 
     data: () => ({
+      name:"First Line Support DashBoard.",
       notifications: [
         'Mike John Responded to your email',
         'You have 5 new tasks',

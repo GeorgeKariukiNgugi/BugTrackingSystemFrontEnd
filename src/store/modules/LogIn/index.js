@@ -1,4 +1,5 @@
 import axios from "axios";
+import router from "../../../router";
 const state = {
         unSuccessfulLogIn : false,
         postingProgress: true,
@@ -6,8 +7,7 @@ const state = {
 const mutations ={
 
     UNSUCCESSFUL_LOG_IN(state,payload){
-            state.unSuccessfulLogIn = payload;
-            console.log("This is the mutation for the unsucessful LogIn.");
+            state.unSuccessfulLogIn = payload;            
     },
     UNSET_THE_LOGIN_STATUS(state,payload){
         state.successfulLogIn = payload;
@@ -29,11 +29,26 @@ const actions ={
             response => {                 
                 //! getting the status of the request that is sent. 
                 console.log(response);
-                if (response.status === 200) {                    
+                if (response.status === 200) {  
+                    commit("PROGRESS_TO_POSTING",false);                  
                     // ! if the request is successful.                    
                     // ! redirect to the appropriate page based on the roles and permissions in the application. 
-                    commit("PROGRESS_TO_POSTING",false);
-                    console.log("SUCCESS.");                    
+                    
+                    var role = response.data.role
+
+                    switch (role[0]) {
+                        case 'user':
+                            router.push('/firstLineSupport') 
+                            break;
+                            case 'firstLineSupport':                                
+                            router.push('/firstLineSupport') 
+                            break;
+                            
+                    
+                        default:
+                            break;
+                    }
+                                      
 
                 } else if(response.status === 206){
                     // ! if the request is unsuccessful.                    
